@@ -1,0 +1,11 @@
+# Ignore VS Build tools generated files
+*pdb
+*ilk
+*exe
+*obj
+
+# Ignore VIM generated temp files
+*~
+
+*.swp
+*.swo
