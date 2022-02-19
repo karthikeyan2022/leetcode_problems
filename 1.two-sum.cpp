@@ -8,7 +8,6 @@
 
 #define TOGGLE_CODE    1
 
-
 class Solution {
 public:
 
@@ -21,7 +20,6 @@ public:
         unordered_map<int,int> simplehash;
         simplehash.clear();
        
-
         for (int i = 0; i < size; i++)
         {
             unordered_map<int,int> :: iterator itr;
@@ -46,19 +44,11 @@ public:
 
 
         }
-
 #else
-        
         for(int i = 0; i < size; i++)
         {
-            // if one number is greater than target, 
-            // no need to search for its pair
-            //if(nums[i] > target && target > 0) continue;
-
             for(int j = 0; j < size; j++)
             {
-                //if(nums[j] > target && target > 0) continue;
-
                 // to avoid comparing same number
                 if(i == j) continue;
 
@@ -70,7 +60,6 @@ public:
                 }
             }
         }
-        
 #endif
         return ret;
         
