@@ -1,8 +1,8 @@
 # Leetcode problems
 
-# Useful Git commands
+## Useful Git commands
 
-1.) Useful steps while creating a new Github project and uploading it.
+### Useful steps while creating a new Github project
 
 `echo "# leetcode_problems" >> README.md`\
 
@@ -13,15 +13,14 @@
 `git remote add origin https://github.com/karthikeyan2022/leetcode_problems.git`\
 `git push -u origin main`\
 
-2.) Quick steps for commiting a small change in file
+### Quick steps for commiting a small change in file
 
 `git status`
 `git add filename`
 `git commit -m "any message"`\
 `git push -u origin main`\
 
-
-# Useful VS code shortcuts
+## Useful VS code shortcuts
 
 Ctrl + 0 --> Focus on File explorer
 
@@ -30,3 +29,13 @@ Ctrl + PageUp/PageDown --> Traverse between open files
 Ctrl + [num] --> Switch tab groups to particular [num] 1,2..
 
 Ctrl + F4 --> close the open file where cursor is present.
+
+Ctrl + Shift + ArrowUp --> Copy line up
+
+Ctrl + Shift + ArrorDown --> Copy line down
+
+Ctrl + Shift + K --> Delete current line
+
+## Useful VIM shortcuts (edit & browsing)
+
+dd --> delete the current line.
