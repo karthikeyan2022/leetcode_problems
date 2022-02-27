@@ -4,4 +4,6 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
-void parseVector(std::vector<int> nums, std::string inputstr);
+
+void printVector(std::vector<int> nums);
+void printSpaces(int count);
