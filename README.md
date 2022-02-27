@@ -22,10 +22,10 @@
 
 ### Command for cleaning untracked or ignored files
 
-To show what files will be deleted, add `-n` option
+To show what files will be deleted, add `-n` option  
 `git clean -n -d`
 
-Delete all files
+Delete all files 
 `git clean -f`
 
 To remove ignored files
