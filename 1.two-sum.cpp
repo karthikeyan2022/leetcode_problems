@@ -6,15 +6,11 @@
 
 // @lc code=start
 
-#define DEBUG   1
+#define DEBUG   0
 #define TOGGLE_CODE    1
 
 #if(DEBUG)
-//#include ".\util\parse.h"
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <string>
+#include "parse.h" // parse.h is in .\util directory (see build.bat)
 using namespace std;
 #endif
 
@@ -72,18 +68,35 @@ public:
 };
 
 #if(DEBUG)
-int main()
+int main(int argc, char *argv[])
 {
     class Solution* sol = new Solution();
     string inputstr;
+    inputstr = argv[0];
 
+    cout << inputstr << endl;
+    reverse(inputstr.begin(), inputstr.end());
+    cout << inputstr << endl;
+
+    size_t spos = inputstr.find(".");
+    size_t epos = inputstr.find("\\");
+
+    cout << spos << " " << epos << endl;
+
+    string fname = inputstr.substr(spos,epos);
+
+    cout << fname << endl;
+    for(int i = 0; i < argc; i++)
+    {
+        cout << argv[i] << endl;
+    }
     vector<int> nums = {1,2,3,4,5};
     inputstr = "hello";
 
-  //  parseVector(nums, inputstr);
+    //parseVector(nums, inputstr);
     vector<int> ret = sol->twoSum(nums, 9);
     
-    cout << ret[0] << ret[1] << endl;
+   // cout << ret[0] << ret[1] << endl;
  }
 #endif
 // @lc code=end

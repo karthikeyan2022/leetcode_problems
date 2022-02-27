@@ -10,7 +10,9 @@ if not exist %VS2022TOOLS% (
 :: call that script, which essentially sets up the VS Developer Command Prompt
 call %VS2022TOOLS%
 
+:: print the current working directory
+echo %cd%
 :: run the compiler with your arguments
-cl.exe /EHsc /Zi /Fe: %1.exe %1.cpp
+cl.exe /EHsc /Zi /I .\util\ /Fe: %1.exe %1.cpp .\util\parse.cpp
 
 exit
