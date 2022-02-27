@@ -4,21 +4,21 @@
 
 ### Useful steps while creating a new Github project
 
-`echo "# leetcode_problems" >> README.md`\
+`echo "# leetcode_problems" >> README.md`
 
 `git init`\
 `git add README.md`\
 `git commit -m "first commit"`\
 `git branch -M main`\
 `git remote add origin https://github.com/karthikeyan2022/leetcode_problems.git`\
-`git push -u origin main`\
+`git push -u origin main`
 
 ### Quick steps for commiting a small change in file
 
-`git status`
-`git add filename`
+`git status`\
+`git add filename`\
 `git commit -m "any message"`\
-`git push -u origin main`\
+`git push -u origin main`
 
 ## Useful VS code shortcuts
 
@@ -39,3 +39,7 @@ Ctrl + Shift + K --> Delete current line
 ## Useful VIM shortcuts (edit & browsing)
 
 dd --> delete the current line.
+
+a --> move cursor to end of line for append
+
+x --> delete a character present currently in cursor
