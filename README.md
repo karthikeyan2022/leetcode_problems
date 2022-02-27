@@ -20,6 +20,20 @@
 `git commit -m "any message"`\
 `git push -u origin main`
 
+### Command for cleaning untracked or ignored files
+
+To show what files will be deleted, add `-n` option
+`git clean -n -d`
+
+Delete all files
+`git clean -f`
+
+To remove ignored files
+`git clean -f -X`
+
+To remove both ignored and non-ignored files
+`git clean -f -x`
+
 ## Useful VS code shortcuts
 
 Ctrl + 0 --> Focus on File explorer
