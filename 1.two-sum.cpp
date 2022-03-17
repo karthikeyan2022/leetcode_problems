@@ -6,7 +6,7 @@
 
 // @lc code=start
 
-#define DEBUG   0
+#define DEBUG   1
 #define TOGGLE_CODE    1
 
 #if(DEBUG)
@@ -70,33 +70,35 @@ public:
 #if(DEBUG)
 int main(int argc, char *argv[])
 {
-    class Solution* sol = new Solution();
-    string inputstr;
-    inputstr = argv[0];
+    class Solution* sol = new Solution(); // create Solution object
+    
+    FILE* fp = parseFile(argv[0]);
+    char line[300];
+    int len = 300;
 
-    cout << inputstr << endl;
-    reverse(inputstr.begin(), inputstr.end());
-    cout << inputstr << endl;
+    vector<int> nums;
 
-    size_t spos = inputstr.find(".");
-    size_t epos = inputstr.find("\\");
-
-    cout << spos << " " << epos << endl;
-
-    string fname = inputstr.substr(spos,epos);
-
-    cout << fname << endl;
-    for(int i = 0; i < argc; i++)
+    while(fgets(line, len, fp) != NULL)
     {
-        cout << argv[i] << endl;
-    }
-    vector<int> nums = {1,2,3,4,5};
-    inputstr = "hello";
+        std::cout << line << std::endl;
 
-    //parseVector(nums, inputstr);
+        if(!parseVector(line, inputArr))
+        {
+            fclose(fp);
+            exit(-1);
+        }
+    }
+
+    fclose(fp);
+    //vector<int> nums = {1,2,3,4,5};
+  
     vector<int> ret = sol->twoSum(nums, 9);
     
    // cout << ret[0] << ret[1] << endl;
+
+    // delete the solution object
+    delete sol;
+
  }
 #endif
 // @lc code=end
