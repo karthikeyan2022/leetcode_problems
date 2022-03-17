@@ -78,11 +78,11 @@ int main(int argc, char *argv[])
 
     vector<int> nums;
 
-    while(fgets(line, len, fp) != NULL)
+    if(fgets(line, len, fp) != NULL)
     {
         std::cout << line << std::endl;
 
-        if(!parseVector(line, inputArr))
+        if(!parseVector(line, nums))
         {
             fclose(fp);
             exit(-1);
