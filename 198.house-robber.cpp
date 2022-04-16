@@ -6,7 +6,7 @@
 
 // @lc code=start
 
-#define RECUR   0
+#define RECUR       0
 #define DP          1
 #define MODE        (1)
 
@@ -36,7 +36,7 @@ public:
             doRecursive(1, idx+1, sum+nums[idx],nums);
             doRecursive(0, idx+1, sum, nums);
         }
-        else
+        else // include case.. so pass 0 to not include in next call
         {
             doRecursive(0, idx+1, sum, nums);
         }
