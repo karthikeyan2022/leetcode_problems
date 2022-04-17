@@ -126,6 +126,10 @@ public:
 #if(DEBUG)
 int main()
 {
+    /*
+    5
+    [[1,4],[2,4],[3,1],[3,2]]
+    */
     class Solution* sol = new Solution();
 
     vector<vector<int>> prereq;
