@@ -89,3 +89,15 @@ bool parseVector(char* line, std::vector<int>& nums)
     return 1;
 }
 
+
+void printLinkedList(ListNode* head)
+{
+    cout << "Linked list : ";
+    while(head)
+    {
+        cout << head->val << " ";
+        head = head->next;
+    }
+
+    cout << endl;
+}
