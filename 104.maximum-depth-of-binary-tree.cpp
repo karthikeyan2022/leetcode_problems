@@ -16,31 +16,27 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+#define MAXIMUM     max
+
 class Solution {
 public:
 
-    int maxval = 0;
-
-    void doRecursive(TreeNode* node, int currval)
+    int GetMaxDepthRecur(TreeNode* node)
     {
-        if(node == nullptr)
+        // If current node is valid, increment '1'
+        if(node)
         {
-            if(currval-1 > maxval)
-            {
-                maxval = currval - 1;
-            }
-            return;
+            return MAXIMUM(1 + GetMaxDepthRecur(node->left), 
+                           1 + GetMaxDepthRecur(node->right));
         }
 
-        doRecursive(node->left, currval+1);
-        doRecursive(node->right, currval+1);
+        return 0;
     }
+
+    // Functions to implement
     int maxDepth(TreeNode* root) {
-        
-
-        doRecursive(root, 1);
-
-        return maxval;
+        return GetMaxDepthRecur(root);
     }
 };
 // @lc code=end

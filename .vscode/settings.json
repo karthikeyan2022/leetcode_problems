@@ -24,6 +24,9 @@
         "utility": "cpp",
         "xhash": "cpp",
         "xiosbase": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "algorithm": "cpp",
+        "chrono": "cpp",
+        "limits": "cpp"
     }
 }
