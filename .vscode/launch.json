@@ -1,3 +1,9 @@
+/* 
+ launch.json - debugger config file
+ 
+ Reference:
+ 1. type: https://code.visualstudio.com/docs/cpp/launch-json-reference#_type
+ */
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
