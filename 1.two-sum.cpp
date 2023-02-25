@@ -6,8 +6,8 @@
 
 // @lc code=start
 
-#define DEBUG   1
-#define TOGGLE_CODE    1
+#define DEBUG           0
+#define TOGGLE_CODE     1
 
 #if(DEBUG)
 #include "parse.h" // parse.h is in .\util directory (see build.bat)
@@ -22,27 +22,29 @@ public:
         vector<int> ret;
 
 #if(TOGGLE_CODE)
+        // Key value    --> entry in nums[i]
+        // Mapped value --> idx in nums[i]
         unordered_map<int,int> simplehash;
         unordered_map<int,int> :: iterator itr;
 
-        for (int i = 0; i < size; i++)
+        for (int idx = 0; idx < size; idx++)
         {
-            itr = simplehash.find(nums[i]);
+            itr = simplehash.find(nums[idx] /*key*/);
 
-            // if value is found( matching num) and it is not the same one
+            // if value is found(matching num), return the indices
             if(itr != simplehash.end())
             {
-                   ret.push_back(itr->second);
-                   ret.push_back(i);
+                   ret.push_back(itr->second /*hashed idx*/);
+                   ret.push_back(idx         /*current idx*/);
                    return ret; 
             }
 
-            // insert the index to its pairnum key
+            // insert the idx to its pairnum key
             //find other pair and insert to hash
-            int pairnum = target - nums[i];
+            int pairnum = target - nums[idx];
 
-            // pairnum is key, i is value
-            simplehash[pairnum] = i; 
+            // pairnum is key value, idx is mapped value
+            simplehash[pairnum] = idx; 
 
         }
 #else
