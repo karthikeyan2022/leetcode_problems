@@ -3,9 +3,6 @@
 #include <unordered_set>
 using namespace std;
 
-
-
-
 bool containsDuplicate(vector<int>& nums) {
         
     unordered_set<int> simplehash;
