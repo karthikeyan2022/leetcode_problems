@@ -11,10 +11,10 @@
 				"problemMatcher": ["$msCompile"]							// problemmatcher compatible for windows
 			},
 			"args": [
-				"${fileBasenameNoExtension}"
+				"${fileDirname}\\${fileBasenameNoExtension}"
 			],
 			"options": {
-				"cwd": "${fileDirname}"
+				//"cwd": "${fileDirname}"                                   // to execute from .\.vscode\build.bat(root dir) 
 			},
 			"problemMatcher": [												// [TODO] change for linux
 				"$msCompile"
