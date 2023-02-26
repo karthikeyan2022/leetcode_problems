@@ -27,6 +27,7 @@
         "xtree": "cpp",
         "algorithm": "cpp",
         "chrono": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "xlocale": "cpp"
     }
 }
