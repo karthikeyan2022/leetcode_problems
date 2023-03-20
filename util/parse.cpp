@@ -90,3 +90,32 @@ void printLinkedList(ListNode* head)
 
     cout << endl;
 }
+
+FILE* parseFileByFstream(char* filename)
+{
+    fstream inputfile;
+
+    string inputFileName = filename;
+    FILE *fp = NULL;
+
+    cout << inputFileName << endl;
+
+    string sample = inputFileName;
+    sample.erase(sample.end()-3, sample.end());
+    cout << sample << endl;
+    
+    size_t spos = inputFileName.find("exe");
+    inputFileName[spos]   = 't';
+    inputFileName[spos+1] = 'x';
+    inputFileName[spos+2] = 't';
+    
+    fp = fopen(inputFileName.c_str(), "r");
+
+    if (fp == NULL)
+    {
+		fprintf(stderr, "input file %s not found.  Exiting.\n", inputFileName.c_str());
+		exit(-1);
+	}
+
+    return fp;
+}

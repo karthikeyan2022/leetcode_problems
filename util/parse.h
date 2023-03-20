@@ -4,9 +4,11 @@
 
 
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <vector>
 #include <unordered_map>
-#include <string>
+
 
 struct ListNode {
      int val;
@@ -36,8 +38,10 @@ void printVector(const std::vector<T> nums)
 void printSpaces(int count);
 
 FILE* parseFile(char* filename);
+
 bool parseVector(char* line, std::vector<int>& nums);
 
 void printLinkedList(ListNode* head);
 
+FILE* parseFileByFstream(char* filename);
 #endif // _PARSE_H__

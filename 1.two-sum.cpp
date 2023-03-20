@@ -6,7 +6,7 @@
 
 // @lc code=start
 
-#define DEBUG           0
+#define DEBUG           1
 #define TOGGLE_CODE     1
 
 #if(DEBUG)
@@ -74,12 +74,18 @@ int main(int argc, char *argv[])
 {
     class Solution* sol = new Solution(); // create Solution object
     
-    FILE* fp = parseFile(argv[0]);
+    FILE* fp = parseFileByFstream(argv[0]);
     char line[300];
     int len = 300;
 
+    // 1. input and output variables declare
     vector<int> nums;
+    int target;
+    vector<int> indices;
 
+    // 2. get values for input variables
+    // 2.1 Get the nums array 
+    //vector<int> nums = {1,2,3,4,5};
     if(fgets(line, len, fp) != NULL)
     {
         std::cout << line << std::endl;
@@ -90,13 +96,15 @@ int main(int argc, char *argv[])
             exit(-1);
         }
     }
-
     fclose(fp);
-    //vector<int> nums = {1,2,3,4,5};
-  
-    vector<int> ret = sol->twoSum(nums, 9);
+
+    // 2.2 Get the target value
+    target = 9; // [TODO]
+
+    indices = sol->twoSum(nums, target);
     
-   // cout << ret[0] << ret[1] << endl;
+    cout << "Indices of two sum is : ";
+    cout << indices[0] << " " << indices[1] << endl;
 
     // delete the solution object
     delete sol;

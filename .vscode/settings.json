@@ -28,6 +28,10 @@
         "algorithm": "cpp",
         "chrono": "cpp",
         "limits": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "iosfwd": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "xutility": "cpp"
     }
 }
