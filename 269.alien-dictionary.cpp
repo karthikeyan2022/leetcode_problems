@@ -6,16 +6,6 @@
  */
 
 
-#include<list>
-struct node
-{
-    char c;
-    struct node* children[26];
-    int count;
-};
-
-
-
 class Solution {
 public:
     /**
@@ -23,198 +13,184 @@ public:
      * @return: a string which is correct order
      */
 
-    struct node root;
+    vector<int> adjlist[26];
+    string findOrder(int numCourses, vector<int>& indegree, vector<int>& valid) {
+        
+       
 
-    void init_trie()
-    {
-        root.count = 0;
-        for(int i = 0; i < 26; i++) {
-            root.children[i] = 0;
-        }
-    }
+        //vector<int> adjlist[numCourses];
 
-    struct node* get_new_node(char c)
-    {
-        struct node* new_node = new node();
-        new_node->c = c;
-        new_node->count = 0;
-        for(int i = 0; i < 26; i++) {
-            new_node->children[i] = 0;
-        }
-        return new_node;
-    }
+        // formm edge b --> a
+        // for(auto edge : prerequisites) {
+        //     int a = edge[0];
+        //     int b = edge[1];
 
-    void insert_to_trie(string str)
-    {
-        struct node* curr = &root;
-        int strlen = str.size();
+        //     adjlist[b].push_back(a);
+        //     indegree[a]++;
+        // }
 
-        for(int i = 0; i < strlen; i++)
-        {
-            char c = str[i];
-            int j;
-            for(j = 0; j < curr->count; j++) {
-                if( curr->children[j]->c == c)
-                    break;
+        queue<int> courseq;
+        //vector<int> retVal;
+        string retstr;
+        string remstr;
+        for(int i = 0; i < indegree.size(); i++){
+            if(indegree[i] == 0 && valid[i]) {
+
+                if(adjlist[i].size() == 0)
+                {
+                    char c = i + 'a';
+                    remstr += c;
+                    continue;
+                }
+
+                courseq.push(i);
             }
+        }
 
-            if(j != curr->count && curr->children[j])
+       // return retVal;
+        while(!courseq.empty()) 
+        {
+            int u = courseq.front();
+            int v;
+          //  cout << u << " ";
+          char c = u + 'a';
+            cout << c << " ";
+            retstr += c;
+            //retVal.push_back(u);
+            courseq.pop();
+
+            // 1.) traverse and remove the edge i.e., degrement the indegree
+            for(int i = 0; i < adjlist[u].size(); i++)
             {
-                curr = curr->children[j];
+                v = adjlist[u][i];
+
+                if(indegree[v] > 0)
+                    indegree[v]--;
+
+                if(indegree[v] == 0) {
+                    courseq.push(v);
+                    indegree[v] = -1;
+                }
+            }
+        }
+        sort(remstr.begin(), remstr.end());
+        string finalstr = "";
+        int l, r;
+        l = r = 0;
+        while(retstr[l] != '\0' || remstr[r] != '\0')
+        {
+            if(retstr[l] == '\0')
+            {
+               finalstr += remstr[r++];
+            }
+            else if(remstr[r] == '\0')
+            {
+                finalstr += retstr[l++];
             }
             else
             {
-                curr->count++;
-                curr->children[j] = get_new_node(c);
-                curr = curr->children[j];
+                if(retstr[l] < remstr[r])
+                {
+                    finalstr += retstr[l++];
+                }
+                else
+                {
+                    finalstr += remstr[r++];
+                }
             }
         }
-    }
-    
-    void add_to_graph(struct node* parent, int i, vector<vector<int>>& adjlist)
-    {
-        int u = parent->children[i]->c - 'a';
-        int v = parent->children[i+1]->c -'a';
-
-        for(int j : adjlist[u])
+        
+        //retstr.append(remstr);
+        if(finalstr.size() != numCourses)
         {
-            if(j == v) return;
+            cout << finalstr << endl;
+            cout << numCourses << endl;
+            return "";
+        }
+
+        //reverse(retVal.begin(), retVal.end());
+        return finalstr;
+    }
+
+    void checkAndPush(int u, int v, vector<int>&valid, vector<int>& indegree)
+    {
+        // check if already pushed..
+        for(int i = 0; i < adjlist[u].size(); i++)
+        {
+            if(adjlist[u][i] == v)
+                return;
         }
 
         adjlist[u].push_back(v);
-        char c1 = u + 'a';
-        char c2 = v + 'a';
-        //cout << "push u: " << c1 << " --> v: " << c2 << endl; 
-        //cout << "push " << u << " --> " << v << endl;
-
+        valid[u] = valid[v] = 1;
+        indegree[v]++;
     }
-    void print_trie(vector<vector<int>>& adjlist)
-    {
-        struct node* curr = &root;
-        list<struct node*> ll;
-
-        ll.push_back(&root);
-
-        int count = curr->count;
-
-
-        while(!ll.empty())
-        {
-            struct node* curr = ll.front();
-            ll.pop_front();
-
-            count = curr->count;
-            /*
-            for(int i = 0; i < count; i++) {
-                cout << curr->children[i]->c << " ";
-            }
-            cout << endl;*/
-
-            for(int i = 0; i < count-1; i++) {
-                add_to_graph(curr, i, adjlist);
-            }
-
-            for(int i = 0; i < count; i++) {
-                ll.push_back(curr->children[i]);
-            }
-        }        
-    }
-
-    bool checkcycle(vector<vector<int>>& adjlist, int u, int p, vector<bool>& visited)
-    {
-        visited[u] = true;
-
-        int len = adjlist[u].size();
-
-        int v;
-        // go u --> v
-        for(int i = 0; i < len; i++)
-        {
-            v = adjlist[u][i];
-            // if v is parent of u, skip
-            if(v == p)
-                continue;
-
-            if(!visited[v])
-            {
-                if(checkcycle(adjlist, v , u /*parent*/ , visited))
-                    return true;
-            }
-            else
-            {
-                // cycle is detected.
-                //cout << "cycle is detected: " << v << " " << u << endl;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    string getfinalstring(vector<vector<int>>& adjlist)
-    {
-        string str = "";
-        list<int> ll;
-        int count;
-        int u = root.children[0]->c - 'a';
-
-        ll.push_back(u);
-
-        while(!ll.empty())
-        {
-            int num = ll.front();
-            ll.pop_front();
-
-            char ch = num + 'a';
-            str.push_back(ch);
-
-            count = adjlist[num].size();
-            for(int i = 0; i < count; i++) {
-                ll.push_back(adjlist[num][i]);
-            }
-        }
-        return str;        
-    }
-
+    
     string alienOrder(vector<string> &words) {
         // Write your code here
-        string str;
 
-        vector<vector<int>> adjlist(26);
-
-        init_trie();
-
-        for(string s : words)
+        int len = words.size();
+        vector<int> indegree(26, 0);
+        vector<int> valid(26,0);
+        for(int i = 0; i < len-1; i++)
         {
-            insert_to_trie(s);
-        }
+            string w1 = words[i];
+            string w2 = words[i+1];
 
-        print_trie(adjlist);
+            int minlen = min(w1.size(), w2.size());
 
-        vector<bool> visited(26, 0);
-
-        for(int i = 0; i < 26; i++)
-        {
-            for(auto j : visited)
-                j = 0;
-            // dfs for each vector
-            //if(!visited[i])
+            // invalid case : example: wrt  & wr
+            if(w1.substr(0,minlen) == w2.substr(0,minlen) && w1.size() > w2.size())
             {
-                // check for cycle and if true return false
-                if(checkcycle(adjlist, i, -1, visited))
-                {
-                    return "";
-                }
+                return "";
             }
-            
+
+            int u, v;
+            for(int i = 0; i < w1.size(); i++)
+            {
+                valid[w1[i]-'a']= 1;
+            }
+            for(int i = 0; i < w2.size(); i++)
+            {
+                valid[w2[i]-'a']= 1;
+            }
+            for(int j = 0; j < minlen; j++) {
+                
+                valid[w1[j]-'a'] = valid[w2[j]-'a'] = 1;
+                // if(j != 0 && w1[j-1] == w2[j-1])
+                // {
+                //     u = w1[j-1]-'a';
+                //     v = w1[j]-'a';
+                //     cout << u+'a' << " " << v+'a' << endl;
+                //     checkAndPush(u, v, valid, indegree);
+
+                //     u = w2[j-1]-'a';
+                //     v = w2[j]-'a';
+                //     checkAndPush(u, v, valid, indegree);
+                // }
+
+                if(w1[j] != w2[j])
+                {
+                    u = w1[j]-'a';
+                    v = w2[j]-'a';
+
+                    checkAndPush(u, v, valid, indegree);
+                    break;
+                }
+
+            }
         }
 
-        str = getfinalstring(adjlist);
+        int numChar = 0;
 
-        cout << "test case done" << endl;
-        
-        return str;
+        for(int i = 0; i < 26; i++) {
+            if(valid[i] > 0) {
+                numChar++;
+            }
+        }
+
+
+        return findOrder(numChar, indegree, valid);
 
     }
 };
