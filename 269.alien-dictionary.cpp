@@ -5,7 +5,7 @@
  * Lint code link: https://www.lintcode.com/problem/892 
  */
 
-
+#define CHAR_RANGE  (26)
 class Solution {
 public:
     /**
@@ -13,29 +13,22 @@ public:
      * @return: a string which is correct order
      */
 
-    vector<int> adjlist[26];
-    string findOrder(int numCourses, vector<int>& indegree, vector<int>& valid) {
+    vector<int> adjlist[CHAR_RANGE];
+
+    string findOrder(int numChars, vector<int>& indegree, vector<int>& valid) {
         
-       
-
-        //vector<int> adjlist[numCourses];
-
-        // formm edge b --> a
-        // for(auto edge : prerequisites) {
-        //     int a = edge[0];
-        //     int b = edge[1];
-
-        //     adjlist[b].push_back(a);
-        //     indegree[a]++;
-        // }
-
         queue<int> courseq;
-        //vector<int> retVal;
+
+        // this string is formed from adj list 
         string retstr;
+
+        // this string is formed from remaining chars not associated with adjlist
         string remstr;
-        for(int i = 0; i < indegree.size(); i++){
+
+        for(int i = 0; i < CHAR_RANGE; i++) {
             if(indegree[i] == 0 && valid[i]) {
 
+                // if nothing in adjlist, then it is dangling char
                 if(adjlist[i].size() == 0)
                 {
                     char c = i + 'a';
@@ -47,16 +40,18 @@ public:
             }
         }
 
-       // return retVal;
+        // remstr is constructed. Now lexicographicall sort int
+        sort(remstr.begin(), remstr.end());
+
+        // construct retstr here.
         while(!courseq.empty()) 
         {
             int u = courseq.front();
             int v;
-          //  cout << u << " ";
-          char c = u + 'a';
-            cout << c << " ";
+             char c = u + 'a';
+            //cout << c << " ";
             retstr += c;
-            //retVal.push_back(u);
+            
             courseq.pop();
 
             // 1.) traverse and remove the edge i.e., degrement the indegree
@@ -73,7 +68,8 @@ public:
                 }
             }
         }
-        sort(remstr.begin(), remstr.end());
+
+        // using two pointer sort the two string and merge it to finalstr   
         string finalstr = "";
         int l, r;
         l = r = 0;
@@ -100,15 +96,13 @@ public:
             }
         }
         
-        //retstr.append(remstr);
-        if(finalstr.size() != numCourses)
+        if(finalstr.size() != numChars)
         {
-            cout << finalstr << endl;
-            cout << numCourses << endl;
+            //cout << finalstr << endl;
+            //cout << numChars << endl;
             return "";
         }
 
-        //reverse(retVal.begin(), retVal.end());
         return finalstr;
     }
 
@@ -122,16 +116,16 @@ public:
         }
 
         adjlist[u].push_back(v);
-        valid[u] = valid[v] = 1;
+        //valid[u] = valid[v] = 1;
         indegree[v]++;
     }
-    
+
     string alienOrder(vector<string> &words) {
         // Write your code here
 
         int len = words.size();
-        vector<int> indegree(26, 0);
-        vector<int> valid(26,0);
+        vector<int> indegree(CHAR_RANGE, 0);
+        vector<int> valid(CHAR_RANGE,0);
         for(int i = 0; i < len-1; i++)
         {
             string w1 = words[i];
@@ -154,21 +148,10 @@ public:
             {
                 valid[w2[i]-'a']= 1;
             }
+
+            // Important: find the differ point and form an edge
             for(int j = 0; j < minlen; j++) {
                 
-                valid[w1[j]-'a'] = valid[w2[j]-'a'] = 1;
-                // if(j != 0 && w1[j-1] == w2[j-1])
-                // {
-                //     u = w1[j-1]-'a';
-                //     v = w1[j]-'a';
-                //     cout << u+'a' << " " << v+'a' << endl;
-                //     checkAndPush(u, v, valid, indegree);
-
-                //     u = w2[j-1]-'a';
-                //     v = w2[j]-'a';
-                //     checkAndPush(u, v, valid, indegree);
-                // }
-
                 if(w1[j] != w2[j])
                 {
                     u = w1[j]-'a';
@@ -183,12 +166,11 @@ public:
 
         int numChar = 0;
 
-        for(int i = 0; i < 26; i++) {
+        for(int i = 0; i < CHAR_RANGE; i++) {
             if(valid[i] > 0) {
                 numChar++;
             }
         }
-
 
         return findOrder(numChar, indegree, valid);
 
