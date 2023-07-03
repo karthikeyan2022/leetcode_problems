@@ -5,6 +5,13 @@
  */
 
 // @lc code=start
+
+#define DEBUG 1
+
+#if(DEBUG)
+#include ".\util\init.h"
+#endif
+
 class Solution {
 public:
 
@@ -60,5 +67,26 @@ public:
         return retVect;
     }
 };
+
+#if(DEBUG)
+int main()
+{
+    class Solution* sol = new Solution();
+
+    vector<int> nums;
+    for(int i = 1; i <= 3; i++){
+        nums.push_back(i);
+    }
+    vector<vector<int>> retVect = sol->subsets(nums);
+
+    for(auto vect : retVect) {
+        vector<int> temp = vect;
+        cout << "[ ";
+        for(auto num : temp)
+            cout << num << " ";
+        cout << "]" << endl;
+    }
+}
+#endif
 // @lc code=end
 
