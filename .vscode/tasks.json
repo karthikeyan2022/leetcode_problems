@@ -28,7 +28,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe build active file",
-            "command": "C:\\cygwin64\\bin\\g++.exe",
+            "command": "g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
