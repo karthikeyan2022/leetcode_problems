@@ -30,7 +30,7 @@ while(interval times)
 #if(DEBUG)
 #include<vector>
 #include<iostream>
-#include "parse.h"
+#include ".\util\parse.h"
 using namespace std;
 #endif
 

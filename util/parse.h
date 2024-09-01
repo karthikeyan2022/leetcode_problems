@@ -31,7 +31,7 @@ void printVector(const std::vector<T> nums)
         std::cout << nums[i] << " ";
     }
 
-    std::cout << endl;
+    std::cout << std::endl;
     
 }
 
