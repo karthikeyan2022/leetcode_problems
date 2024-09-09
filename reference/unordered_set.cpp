@@ -28,8 +28,8 @@ bool containsDuplicate(vector<int>& nums) {
 
 int main()
 {
-    vector<int> nums;
-    nums.push_back(1);
+    vector<int> nums = {1, 2, 3, 4 ,1 };
+    //nums.push_back(1);
 
     if(containsDuplicate(nums))
         cout << "duplicate" << endl;
