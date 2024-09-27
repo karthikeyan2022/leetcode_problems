@@ -42,9 +42,7 @@ public:
             nnode->count = entry.second;
             nodeHeap.push(nnode);
         }
-        
-    
-        
+           
         while(k-- && !nodeHeap.empty())
         {
             struct node* popnode = nodeHeap.top();
