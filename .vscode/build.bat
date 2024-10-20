@@ -13,6 +13,6 @@ call %VS2022TOOLS%
 :: print the current working directory
 echo %cd%
 :: run the compiler with your arguments
-cl.exe /EHsc /Zi /I .\util\ /Fe: %1.exe %1.cpp .\util\parse.cpp
+cl.exe /EHsc /Zi /I .\util\ /Fe: %1.exe %1.cpp .\util\parse.cpp .\util\buildtree.cpp
 
 exit

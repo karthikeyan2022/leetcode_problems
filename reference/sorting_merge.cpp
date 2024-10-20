@@ -1,16 +1,10 @@
 /*
- *
  * Merge sort implementation
  * ascending order sort
-
  */
-
-
 #include <iostream>
 #include <vector>
 using namespace std;
-
-
 
 class Solution
 {

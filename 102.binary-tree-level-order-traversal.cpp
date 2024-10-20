@@ -6,32 +6,16 @@
 
 // @lc code=start
 
-#define DEBUG   0
-
-//Definition for a binary tree node.
-#if(DEBUG)
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-#endif
-
+#define DEBUG   1
 
 #if(DEBUG)
-#include<iostream>
-#include<vector>
-#include<list>
+#include "buildtree.h"
+#include "parse.h"
 using namespace std;
 #endif
 
-
 class Solution {
 public:
-
     list<TreeNode*> listOfNodes;
     vector<vector<int>> levelOrder(TreeNode* root) {
         vector<vector<int>> retVect;
@@ -81,22 +65,27 @@ public:
 
 
 #if(DEBUG)
-int main()
+int main(int argc, char *argv[])
 {
+    TreeNode* root = buildTreeFromFile(argv[0]);
+
+    if(root == 0)
+    {
+        return -1;
+    }
+
     class Solution* sol = new Solution();
-
-    debug(5);
-    TreeNode* left2 = new TreeNode(15);
-    TreeNode* right2 = new TreeNode(7);
-    TreeNode* right1 = new TreeNode(20, left2, right2);
-
-    TreeNode* left1 = new TreeNode(9);
-
-    TreeNode* root = new TreeNode(3, left1, right1);
     
     vector<vector<int>> retVect = sol->levelOrder(root);
 
-    delete sol;    
+    for(vector<int> nums : retVect)
+    { 
+        printVector(nums);
+    }
+    
+    delete sol;  
+
+    return 0;  
 }
 #endif
 // @lc code=end
