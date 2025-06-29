@@ -141,6 +141,12 @@ int main(int argc, char *argv[]) {
     sol->printMatrix(arr2, rows, cols);
 
     sol->matrixAddition(arr1, arr2, rows, cols);
+
+    for(int i = 0; i < rows; i++)
+    {
+        free(arr1[i]);
+        free(arr2[i]);
+    }
     free(arr1);
     free(arr2);
 
